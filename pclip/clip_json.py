@@ -1,7 +1,7 @@
-import requests,json,re,csv,os,subprocess,urllib2,getpass,time
+import requests,json,re,csv,os,subprocess,urllib3,getpass,time
 from pprint import pprint
 from os.path import expanduser
-from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 from os.path import expanduser
 from retrying import retry
 from planet.api.utils import read_planet_json
@@ -65,4 +65,4 @@ def jsonc(path=None,item=None,asset=None):
                 else:
                     print("Issues with: "+(item_id+"_"+item+"_"+asset)+" has error code "+str(main.status_code))
             except Exception as e:
-                print "Could not process "+str(item_id+"_"+item+"_"+asset)
+                print("Could not process "+str(item_id+"_"+item+"_"+asset))

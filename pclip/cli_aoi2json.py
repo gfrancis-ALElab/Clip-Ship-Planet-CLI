@@ -22,14 +22,14 @@ def aoijson(start,end,cloud,inputfile,geo,loc):
     if inputfile == 'KML':
         os.system("python kml_aoi.py --start "+start+" --end "+end+" --cloud "+cloud+" --geo "+geo+" --loc "+loc)
     elif inputfile=='WRS':
-         with open(dir_path+'./wrs_grid.csv', 'rb') as f:
+         with open(dir_path+'/wrs_grid.csv', 'rb') as f:
             reader = csv.reader(f)
             for row in reader:
                 if row[13]== geo:
                     a=str(row[14])
                     strpd=a.split(':')[3].strip('}')
                     filenames = p1+strpd+p2+str(start)+p3+str(end)+p4+p5+str(cloud)+p6
-                    with open(loc+'./aoi.json', 'w') as outfile:
+                    with open(loc+'/aoi.json', 'w') as outfile:
                         outfile.write(filenames)
                         outfile.close()
     elif inputfile == 'GJSON':
@@ -43,9 +43,9 @@ def aoijson(start,end,cloud,inputfile,geo,loc):
             geombase['config'][2]['config']['lte']=str(end)+"T03:59:59.999Z" #change end date
             geombase['config'][3]['config']['gte']=0#change cloud minima default=0
             geombase['config'][3]['config']['lte']=float(cloud)# change cloud maxima
-            with open(loc+"./aoi.json", 'w') as f:
+            with open(loc+"/aoi.json", 'w') as f:
                 f.write(json.dumps(geombase))
-            print("New structured JSON has been created at "+str(os.path.join(loc,"aoi.json")))      
+            print("New structured JSON has been created at "+str(os.path.join(loc,"aoi.json")))
     elif inputfile == 'SHP':
         reader = shapefile.Reader(geo)
         fields = reader.fields[1:]
@@ -61,15 +61,15 @@ def aoijson(start,end,cloud,inputfile,geo,loc):
             geom4=str(geom3).replace(",]",']')
             #print(geom5)
         # write the GeoJSON file
-        with open(loc+'./int.geojson','w') as csvfile:
+        with open(loc+'/int.geojson','w') as csvfile:
             writer=csv.writer(csvfile)
             writer.writerow([str(geom4)])
-        raw= open(loc+'./int.geojson')
+        raw= open(loc+'/int.geojson')
         for line in raw:
             fields=line.strip().split(":")[2]
             f2=fields.strip().split("}")[0]
             filenames = p1+f2+p2+str(start)+p3+str(end)+p4+p5+str(cloud)+p6
-        with open(loc+'./aoi.json', 'w') as outfile:
+        with open(loc+'/aoi.json', 'w') as outfile:
             outfile.write(filenames)
             outfile.close()
     elif inputfile == 'WKT':
@@ -80,6 +80,6 @@ def aoijson(start,end,cloud,inputfile,geo,loc):
             l3=str(l2).replace(", ","],[")
             l4=str(l3).replace(" ",",")
             filenames = p1+l4+p2+str(start)+p3+str(end)+p4+p5+str(cloud)+p6
-        with open(loc+'./aoi.json', 'w') as outfile:
+        with open(loc+'/aoi.json', 'w') as outfile:
             outfile.write(filenames)
             outfile.close()

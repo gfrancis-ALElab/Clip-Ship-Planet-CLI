@@ -1,4 +1,4 @@
-import requests,json,re,csv,os,subprocess,urllib2,argparse,getpass,sys
+import requests,json,re,csv,os,subprocess,urllib3,argparse,getpass,sys
 from pprint import pprint
 from os.path import expanduser
 from clip_idlist import idlist
@@ -10,7 +10,7 @@ from cli_sorter import sort
 if sys.version_info > (3, 0):
     from urllib.request import urlopen, Request
 else:
-    from urllib2 import Request, urlopen
+    from urllib.request import Request, urlopen
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 def planet_key_entry():
     try:
@@ -72,7 +72,7 @@ def main(args=None):
     parser_aoijson.add_argument('--geo', default='./map.geojson',help='map.geojson/aoi.kml/aoi.shp/aoi.wkt file')
     parser_aoijson.add_argument('--loc', help='Location where aoi.json file is to be stored')
     parser_aoijson.set_defaults(func=aoijson_from_parser)
-    
+
     parser_activate=subparsers.add_parser('activate',help='Tool to query and/or activate Planet Assets')
     parser_activate.add_argument('--aoi', help='Choose aoi.json file created earlier')
     parser_activate.add_argument('--action', help='choose between check/activate')

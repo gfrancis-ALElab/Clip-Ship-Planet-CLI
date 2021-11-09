@@ -260,13 +260,13 @@ def size(url, path, item_id, asset_type, overwrite):
     fname = '{}_{}.tif'.format(item_id, asset_type)
     logging.info('Request: {}'.format(url))
     result = requests.get(url)
-    print path
+    print(path)
     return True
 def checklist(url, path, item_id, asset_type, overwrite):
     fname = '{}'.format(item_id)
     logging.info('Request: {}'.format(url))
     result = requests.get(url)
-    print path
+    print(path)
     return True
 
 
@@ -351,14 +351,14 @@ def process_size(path, id_list, item_type, asset_type, overwrite):
         except KeyError:
             print('Could not check activation status - asset type \'{}\' not found for {}'.format(asset_type, item_id))
             result = False
-        
+
 
         results.append(result)
     #print(remain,"MB")
     print("Remaining Space in MB",format(float(remain*1024),'.2f'))
     print("Remaining Space in GB",format(float(remain),'.2f'))
-    print ("Total Size in MB",format(float(summation*1024),'.2f'))
-    print ("Total Size in GB",format(float(summation),'.2f'))
+    print("Total Size in MB",format(float(summation*1024),'.2f'))
+    print("Total Size in GB",format(float(summation),'.2f'))
     return results
 
 def process_checklist(id_list, item_type, asset_type):
@@ -378,13 +378,13 @@ def process_checklist(id_list, item_type, asset_type):
                 print(str(item_id))
                 with open(os.path.join(planethome,"idl.csv"),'a') as csvfile:
                     writer=csv.writer(csvfile,delimiter=',',lineterminator='\n')
-                    writer.writerow([item_id])     
+                    writer.writerow([item_id])
             else:
                 result = False
         except KeyError:
             print('Could not check activation status - asset type \'{}\' not found for {}'.format(asset_type, item_id))
             result = False
-        
+
 
         results.append(result)
     return results
@@ -501,32 +501,32 @@ if __name__ == '__main__':
         parser.error('Error: no action supplied. Please check help (--help) or revise command.')
 
 
-'''Sample commands, for testing.
-python download.py --query "C:\Users\samapriya\Downloads\aoi.json" --checklist PSOrthoTile analytic
-python download.py --query aoi.json --size "D:\Library\PlanetScope" PSOrthoTile analytic
-python download.py --query redding.json --search PSScene3Band visual
-python download.py --query redding.json --check PSScene3Band visual
-python download.py --query redding.json --activate PSScene3Band visual
-python download.py --query redding.json --download /tmp PSScene3Band visual
-python download.py --idlist ids_small.txt --check PSScene3Band visual
-python download.py --idlist ids_small.txt --activate PSScene3Band visual
-python download.py --idlist ids_small.txt --download /tmp PSScene3Band visual
-python download.py --search --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
-python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
-python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31
-python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
-python download.py --download ~/Downloads/ --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
-python download.py --query redding.json --search PSScene3Band visual --satlist sats_redding.txt
-python download.py --query redding.json --search PSScene3Band visual --sats 0c2b 0c19
-python download.py --query redding.json --sats 0c2b 0c19 --search PSScene3Band visual
-python download.py --search --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats 0e0e 0c38
-python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats 0e0e 0c38
-python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31 --sats 0e0e 0c38
-python download.py --search --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --satlist sats_miami.txt
-python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats sats_miami.txt
-python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31 --sats 0e0e 0c38
-python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats sats_miami.txt
-python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31 --sats 0e0e 0c38
-python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
-python download.py --download ~/Downloads/ --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
-'''
+# '''Sample commands, for testing.
+# python download.py --query "C:\Users\samapriya\Downloads\aoi.json" --checklist PSOrthoTile analytic
+# python download.py --query aoi.json --size "D:\Library\PlanetScope" PSOrthoTile analytic
+# python download.py --query redding.json --search PSScene3Band visual
+# python download.py --query redding.json --check PSScene3Band visual
+# python download.py --query redding.json --activate PSScene3Band visual
+# python download.py --query redding.json --download /tmp PSScene3Band visual
+# python download.py --idlist ids_small.txt --check PSScene3Band visual
+# python download.py --idlist ids_small.txt --activate PSScene3Band visual
+# python download.py --idlist ids_small.txt --download /tmp PSScene3Band visual
+# python download.py --search --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
+# python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
+# python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31
+# python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
+# python download.py --download ~/Downloads/ --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
+# python download.py --query redding.json --search PSScene3Band visual --satlist sats_redding.txt
+# python download.py --query redding.json --search PSScene3Band visual --sats 0c2b 0c19
+# python download.py --query redding.json --sats 0c2b 0c19 --search PSScene3Band visual
+# python download.py --search --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats 0e0e 0c38
+# python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats 0e0e 0c38
+# python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31 --sats 0e0e 0c38
+# python download.py --search --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --satlist sats_miami.txt
+# python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats sats_miami.txt
+# python download.py --check --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31 --sats 0e0e 0c38
+# python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01 --sats sats_miami.txt
+# python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-08-01 --end-date 2016-12-31 --sats 0e0e 0c38
+# python download.py --activate --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
+# python download.py --download ~/Downloads/ --bbox -80.209624 25.7777338 -80 26 PSOrthoTile analytic --start-date 2016-01-01
+# '''

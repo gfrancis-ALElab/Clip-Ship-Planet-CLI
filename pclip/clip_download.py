@@ -1,7 +1,7 @@
-import requests,json,re,csv,os,subprocess,urllib2,getpass,time,progressbar
+import requests,json,re,csv,os,subprocess,urllib3,getpass,time,progressbar
 from pprint import pprint
 from os.path import expanduser
-from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 from planet.api.utils import read_planet_json
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 planethome=os.path.dirname(os.path.realpath(__file__))
@@ -32,7 +32,7 @@ def downloadclips(filepath=None):
                     if content['state']=='running':
                             print("Clip Function still running for " +str(item_id))
                     elif content['state']=='succeeded':
-                        filelink = urllib2.urlopen(str(content['_links']['results'][0]))
+                        filelink = urlopen(str(content['_links']['results'][0]))
                         filename=item_id+"_"+item_typ+"_"+asset_typ+".zip"
                         ov=os.path.join(filepath,filename)
                         if not os.path.exists(ov):
@@ -48,6 +48,6 @@ def downloadclips(filepath=None):
                     else:
                         print("Clip Function still " +content['state']+" "+str(filename))
                 except Exception as e:
-                    print e
+                    print(e)
             else:
                 print("Got Download Return Error Code: "+str(downlink.status_code))

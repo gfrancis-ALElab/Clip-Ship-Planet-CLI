@@ -1,7 +1,7 @@
-import requests,json,re,csv,os,subprocess,urllib2,getpass
+import requests,json,re,csv,os,subprocess,urllib3,getpass
 from pprint import pprint
 from os.path import expanduser
-from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 from os.path import expanduser
 from retrying import retry
 from planet.api.utils import read_planet_json
@@ -48,7 +48,7 @@ def geojsonc(path=None,item=None,asset=None):
                         item_typ=(content['targets'][0]['item_type'])
                         asset_typ=(content['targets'][0]['asset_type'])
                         print("Clipping: "+(item_id+"_"+item_typ+"_"+asset_typ))
-                        
+
                         with open(os.path.join(planethome,"urllist.csv"),'a') as csvfile:
                             writer=csv.writer(csvfile,delimiter=',',lineterminator='\n')
                             writer.writerow([URL])
@@ -65,4 +65,4 @@ def geojsonc(path=None,item=None,asset=None):
                     else:
                         print("Issues with: "+(item_id+"_"+item+"_"+asset)+" has error code "+str(main.status_code))
             except Exception as e:
-                print "Could not process "+str(item_id+"_"+item+"_"+asset)
+                print("Could not process "+str(item_id+"_"+item+"_"+asset))
